@@ -6,13 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'quiz-editor';
+  title="Quiz Editor"
 
-  badger = {
-    color1: 'red',
-    color2: 'white',
-    padding: '20px'
-  }
-
-  toolTip = "TestTitleStr"
 }
