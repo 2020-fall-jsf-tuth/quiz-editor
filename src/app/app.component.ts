@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Quiz Editor';
-
-  badger = {
-    color1: 'red',
-    color2: 'white',
-    padding: '20px'
-  };
 }
