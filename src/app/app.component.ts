@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'quiz-editor';
+
+  badger = {
+    color1: 'red',
+    color2: 'white',
+    padding: '20px'
+  }
+
+  toolTip = "TestTitleStr"
 }
