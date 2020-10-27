@@ -340,9 +340,14 @@
 
   <!-- Resources -->
   <h2
-    [style.background-color]="'red'"
-    [style.color]="'white'"
-    [style.padding]="'20px'"
+    [style.background-color]="badger.color1"
+    [style.color]="badger.color2"
+    [style.padding]="badger.padding"
+
+    [attr.title1]="toolTip"
+    [title]="toolTip"
+
+    [innerHTML]="badger.color1"
   >
     Resources
 </h2>
