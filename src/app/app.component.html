@@ -46,7 +46,10 @@
           General
         </div>
         <div class="card-body">
-          {{ selectedQuiz.name }}
+          <input
+            [(ngModel)]="selectedQuiz.name"
+            class="form-control"
+          />
         </div>
       </div>
       <div class="card mb-3">
