@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 export interface QuizDisplay{
   name:string;
-  numberOfQuestion: number;
+  numberOfQuestions: number;
 }
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,15 @@ export class QuizService {
     return [
       {
         name:'Quiz 1',
-        numberOfQuestion: 5
+        numberOfQuestions: 5
       },
       {
         name:'Quiz 2',
-        numberOfQuestion: 0
+        numberOfQuestions: 1
       },
       {
         name:'Quiz 3',
-        numberOfQuestion: 10
+        numberOfQuestions: 10
       }
     ];
   }

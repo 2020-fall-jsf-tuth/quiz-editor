@@ -5,15 +5,15 @@
         Add New Quiz
       </div>
       <div class="card">
-        <div class="list-group">
+        <div class="list-group-flush">
           <div
           class="list-group-item d-flex justify-content-between"
           *ngFor="let quiz of quizzes"
-          (click)= "selectedQuiz(quiz)"
+          (click)= "setSelectedQuiz(quiz)"
           [class.active]="quiz == selectedQuiz">
               {{quiz.name}}
-              <small>
-                {{quiz.numberOfQuestion}} questions <span *ngIf="quiz.numberOfQuestion" != 1>s </span>
+              <small class="font-italic font-weight-lighter">
+                {{quiz.numberOfQuestions}} question<span *ngIf="quiz.numberOfQuestions!= 1">s</span>
               </small>
           </div>
         </div>
