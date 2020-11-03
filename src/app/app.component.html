@@ -5,10 +5,29 @@
         Add New Quiz
       </div>
       <div class="card">
-        Comming soon
+        <div class="list-group">
+          <div
+          class="list-group-item d-flex justify-content-between"
+          *ngFor="let quiz of quizzes"
+          (click)= "selectedQuiz(quiz)"
+          [class.active]="quiz == selectedQuiz">
+              {{quiz.name}}
+              <small>
+                {{quiz.numberOfQuestion}} questions <span *ngIf="quiz.numberOfQuestion" != 1>s </span>
+              </small>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8"
+    *ngIf="selectedQuiz == undefined">
+      <div class="alert alert-info my-3">
+        Select and add
+      </div>
+
+    </div>
+    <div class="col-md-8"
+    *ngIf="selectedQuiz != undefined">
       <div class="btn btn-outline-dark mt-3 mb-3">
         Save
       </div>
