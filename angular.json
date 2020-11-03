@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "quiz-editor"
+    }
+  },
+  "defaultProject": "quiz-editor",
+  "cli": {
+    "analytics": "b007d7e9-f43e-4618-8d0e-f5dc39980616"
+  }
 }
