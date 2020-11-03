@@ -10,7 +10,9 @@
         <div class="list-group list-group-flush">
           <div
             class="list-group-item d-flex justify-content-between"
-            *ngFor="let quiz of quizzes"  
+            *ngFor="let quiz of quizzes"
+            (click)="setSelectedQuiz(quiz)"
+            [class.active]="quiz == selectedQuiz"
           >
             {{ quiz.name }}
             <small class="font-italic font-weight-lighter">
@@ -21,7 +23,19 @@
       </div>
     </div>
 
-    <div class="col-md-8">
+    <div
+      class="col-md-8"
+      *ngIf="selectedQuiz == undefined"
+    >
+      <div class="alert alert-info my-3">
+        Select or create a new quiz
+      </div>
+    </div>
+
+    <div
+      class="col-md-8"
+      *ngIf="selectedQuiz != undefined"
+    >
       <div class="btn btn-outline-dark mt-3 mb-3">
         Save
       </div>
