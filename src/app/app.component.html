@@ -9,6 +9,8 @@
           <div 
           class="list-group-item d-flex justify-content-between"
           *ngFor="let quiz of quizzes"
+          (click)="setSelectedQuiz(quiz)"
+          [class.active]="quiz == selectedQuiz"
           >
             {{ quiz.name }}
             <small class="font-italic font-weight-lighter">
