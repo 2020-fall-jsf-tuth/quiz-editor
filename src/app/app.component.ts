@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { QuizService, QuizDisplay } from './quiz.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'quiz-editor';
+
+  quizzes: QuizDisplay[] = [];
+
+  constructor(private quizSvc: QuizService) {
+    //fetch quizzes here
+    this.quizzes = this.quizSvc.fetchQuizzes();
+  }
+
 }
