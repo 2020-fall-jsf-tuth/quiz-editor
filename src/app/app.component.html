@@ -8,11 +8,11 @@
         <div class="list-group list-group-flush">
           <div 
           class="list-group-item d-flex justify-content-between"
-          *ngfor="let quiz of quizzes"
+          *ngFor="let quiz of quizzes"
           >
             {{ quiz.name }}
             <small class="font-italic font-weight-lighter">
-              {{ quiz.numberOfQuestions}} questions
+              {{ quiz.numberOfQuestions}} question<span *ngIf="quiz.numberOfQuestions !=1">s</span>
 
             </small>
           </div>
