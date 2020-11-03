@@ -42,9 +42,25 @@
         <div class="card-header">
           General
         </div>
-        <div class="card-body">
+        <!-- <div class="card-body" 
+        >
           {{ selectedQuiz.name }}
-        </div>
+
+        </div> -->
+        <div class="card-body" *ngIf="!isEdit; else elseBlock" (click)="isEdit=!isEdit"  
+        >
+            {{selectedQuiz.name}}
+          </div>
+        <ng-template #elseBlock><div class="input-group mb-3">
+          <input [(ngModel)]="selectedQuiz.name" type="text"
+           class="form-control" 
+           placeholder="Recipient's username" 
+           aria-label="Recipient's username" 
+           aria-describedby="basic-addon2">
+          <!-- <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Button</button>
+          </div> -->
+        </div></ng-template>
       </div>
       <div class="card mb-3">
         <div class="card-header">

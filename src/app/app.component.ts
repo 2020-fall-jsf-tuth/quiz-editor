@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { isDeepStrictEqual } from 'util';
 import { QuizService, QuizDisplay } from './quiz.service';
 
 @Component({
@@ -10,6 +11,7 @@ export class AppComponent {
   title = 'quiz-editor';
 
   quizzes: QuizDisplay[] = [];
+  isEdit:boolean = false;
 
   constructor(private quizSvc: QuizService) {
 
@@ -22,5 +24,5 @@ export class AppComponent {
   setSelectedQuiz(quizToSelect: QuizDisplay) {
     this.selectedQuiz = quizToSelect;
   }
-
 }
+
