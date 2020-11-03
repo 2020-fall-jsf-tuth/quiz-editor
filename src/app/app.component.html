@@ -5,7 +5,17 @@
         Add New Quiz
       </div>
       <div class="card">
-        Comming soon
+        <div class="list-group list-group-flush">
+          <div 
+            class="list-group-item d-flex justify-content-between"
+            *ngFor="let quiz of quizzes"
+          >
+          {{ quiz.name }}
+          <small font-italic font-weight-lighter>
+            {{ quiz.numberOfQuestions }} questions 
+          </small>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-8">
