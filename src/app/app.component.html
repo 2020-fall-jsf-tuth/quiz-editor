@@ -43,7 +43,12 @@
           General
         </div>
         <div class="card-body">
-          {{ selectedQuiz.name }}
+          <input 
+            input-group-text
+            type="text"
+            [(ngModel)]="selectedQuiz.name"
+          >
+          <!--{{ selectedQuiz.name }}-->
         </div>
       </div>
       <div class="card mb-3">
