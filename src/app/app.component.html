@@ -14,7 +14,7 @@
           >
             {{ quiz.name }}
             <small class="font-italic font-weight-lighter">
-              {{ quiz.numberOfQuestions }} questions
+              {{ quiz.numberOfQuestions }} question<span *ngIf="quiz.numberOfQuestions != 1">s</span>
             </small>
           </div>
         </div>
