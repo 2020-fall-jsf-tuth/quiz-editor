@@ -23,6 +23,13 @@ export class AppComponent {
 
   setSelectedQuiz(quizToSelect: QuizDisplay) {
     this.selectedQuiz = quizToSelect;
+    document.querySelector("#")
+  }
+
+  addNewQuiz() {
+    this.quizzes = [...this.quizzes, {name:`New Quiz ${this.quizzes.length+1}`, numberOfQuestions:0}]
+    this.selectedQuiz = this.quizzes[this.quizzes.length-1];
+    
   }
 }
 
