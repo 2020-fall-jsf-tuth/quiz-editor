@@ -14,8 +14,10 @@ export class AppComponent {
     //Fetch quizzes
     this.quizzes = this.quizSvc.fetchQuizzes()
   }
+
 selectedQuiz: QuizDisplay = undefined;
-setSelectedQuiz(quizToSelect: QuizDisplay){
+
+setSelectedQuiz(quizToSelect: QuizDisplay) {
   this.selectedQuiz = quizToSelect;
 }
 }
