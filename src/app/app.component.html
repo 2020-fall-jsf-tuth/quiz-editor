@@ -22,6 +22,22 @@
       </div>
     </div>
     <div class="col-md-8">
+      <div
+      class="col-md-8"
+      *ngIf="selectedQuiz == indefined"
+      >
+      <div class="alert alert-info my-3">
+
+        Select or add a new quiz to get started
+
+      </div>
+
+      </div>
+      <div
+      class="col-md-8"
+      *ngIf="selectedQuiz != undefined">
+
+      </div>
       <div class="btn btn-outline-dark mt-3 mb-3">
         Save
       </div>
