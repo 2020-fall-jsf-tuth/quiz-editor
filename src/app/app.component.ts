@@ -11,6 +11,7 @@ export class AppComponent {
 
   quizzes: QuizDisplay[] = [];
 
+  //Constructor used for dependency injection of our quiz service
   constructor(private quizSvc: QuizService) {
 
     // Fetch quizzes here ! ! !
@@ -32,8 +33,7 @@ export class AppComponent {
       numberOfQuestions: 0
     };
 
-    //Take current quiz list objects and spread in all current 
-    //quiz list and add the newly created quiz
+    //spread in all current quiz list objects and add the newly created quiz
     this.quizzes = [
       ...this.quizzes,
       newQuiz
