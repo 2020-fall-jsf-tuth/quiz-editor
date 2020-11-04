@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { QuizService, QuizDisplay } from './quiz.service';
 
 @Component({
@@ -21,6 +21,14 @@ export class AppComponent {
 
   setSelectedQuiz(quizToSelect: QuizDisplay) {
     this.selectedQuiz = quizToSelect;
+
+    setTimeout(
+      () => {
+        console.log(this.autoFocusInput);
+        this.autoFocusInput.nativeElement.select();
+      }
+      , 30
+    );
   }
 
   addNewQuiz() {
@@ -36,4 +44,8 @@ export class AppComponent {
 
     this.setSelectedQuiz(newQuiz);
   }
+
+  @ViewChild('myInputForAutoFocus') 
+  autoFocusInput: any;
+
 }
