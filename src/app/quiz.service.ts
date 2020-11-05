@@ -4,7 +4,11 @@ import { Observable } from 'rxjs';
 
 export interface QuizDisplay {
   name: string;
-  numberOfQuestions: number;
+  questions: QuestionDisplay[];
+}
+
+export interface QuestionDisplay {
+  name: string;
 }
 
 @Injectable({

@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { zip } from 'rxjs';
 import { QuizService, QuizDisplay } from './quiz.service';
 
 @Component({
@@ -19,6 +20,11 @@ export class AppComponent {
       .subscribe(
         (data) => {
           console.log(data);
+          //transform data to ignore unnec
+          this.quizzes = (data as any).map(x => ({
+            name: x.name
+            , questions: x.questions 
+          }));
         }
         ,(err) => {
           console.error(err);
@@ -44,7 +50,7 @@ export class AppComponent {
   addNewQuiz() {
     const newQuiz = {
       name: "Untitled Quiz"
-      , numberOfQuestions: 0
+      , questions: []
     };
 
     this.quizzes = [
