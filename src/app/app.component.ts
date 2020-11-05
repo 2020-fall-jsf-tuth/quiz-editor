@@ -19,6 +19,10 @@ export class AppComponent {
    .subscribe(
      (data)=>{
       console.log(data);
+      this.quizzes = (data as any).map(x=>({
+        name:x.name,
+        questions:x.questions
+      }));
      }, (err)=>{
       console.log(err);
      }
@@ -42,7 +46,7 @@ export class AppComponent {
   addNewQuiz() {
     const newQuiz = {
       name: "Untitled Quiz"
-      , numberOfQuestions: 0
+      ,questions:[]
     };
 
     this.quizzes = [
