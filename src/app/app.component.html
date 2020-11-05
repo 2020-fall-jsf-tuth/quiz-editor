@@ -1,15 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <div 
+      <button 
         class="btn btn-outline-success mt-3 mb-3"
         (click)="addNewQuiz()" 
       >
         Add New Quiz
-      </div>
+      </button>
+
       <div class="card">
         <div class="list-group list-group-flush">
-          <div 
+          <button 
             class="list-group-item d-flex justify-content-between"
             *ngFor="let quiz of quizzes"
             (click)="setSelectedQuiz(quiz)"
@@ -19,10 +20,11 @@
             <small class="font-italic font-weight-lighter">
               {{ quiz.numberOfQuestions }} question<span *ngIf="quiz.numberOfQuestions != 1">s</span>
             </small>
-          </div>
+          </button>
         </div>
       </div>
     </div>
+
     <div 
       class="col-md-8"
       *ngIf="selectedQuiz == undefined"
@@ -31,16 +33,19 @@
         Select or add a new quiz to get started...
       </div>
     </div>
+
     <div 
       class="col-md-8"
       *ngIf="selectedQuiz != undefined"
     >
-      <div class="btn btn-outline-dark mt-3 mb-3">
+      <button class="btn btn-outline-dark mt-3 mb-3">
         Save
-      </div>
-      <div class="btn btn-link mt-3 mb-3">
+      </button>
+
+      <button class="btn btn-link mt-3 mb-3">
         Cancel
-      </div>
+      </button>
+
       <div class="card mb-3">
         <div class="card-header">
           General
@@ -53,6 +58,7 @@
           />
         </div>
       </div>
+
       <div class="card mb-3">
         <div class="card-header">
           Questions
@@ -61,6 +67,7 @@
           Coming soon
         </div>
       </div>
+
       <div class="card">
         <div class="card-header">
           Other
@@ -69,6 +76,7 @@
           Coming soon
         </div>
       </div>
+
     </div>
   </div>
 </div>
