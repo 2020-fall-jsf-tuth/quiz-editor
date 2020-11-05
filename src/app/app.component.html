@@ -9,7 +9,7 @@
       </button>
       <div class="card">
         <div class="list-group list-group-flush">
-          <div
+          <button
             class="list-group-item d-flex justify-content-between"
             *ngFor="let quiz of quizzes"
             (click)="setSelectedQuiz(quiz)"
@@ -19,7 +19,7 @@
             <small class="font-italic font-weight-lighter">
               {{ quiz.numberOfQuestions }} question<span *ngIf="quiz.numberOfQuestions != 1">s</span>
             </small>
-          </div>
+          </button>
         </div>
       </div>
     </div>
