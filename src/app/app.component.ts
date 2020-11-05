@@ -14,7 +14,20 @@ export class AppComponent {
   constructor(private quizSvc: QuizService) {
 
     // Fetch quizzes here ! ! !
-    this.quizzes = this.quizSvc.fetchQuizzes();
+    this.quizSvc.fetchQuizzes()
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.quizzes = (data as any).map(x => ({
+            name: x.name
+            , numberOfQuestions: x.questions.length
+          }));
+        }
+        , (err) => {
+          console.error(err);
+        }
+      )
+    ;
   }
 
   selectedQuiz: QuizDisplay = undefined;
