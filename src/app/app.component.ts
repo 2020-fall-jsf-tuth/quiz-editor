@@ -11,6 +11,8 @@ export class AppComponent {
 
   quizzes: QuizDisplay[] = [];
 
+  errorFetchingQuizzes = false;
+
   constructor(private quizSvc: QuizService) {
 
     // Fetch quizzes here ! ! !
@@ -25,6 +27,7 @@ export class AppComponent {
         }
         , (err) => {
           console.error(err);
+          this.errorFetchingQuizzes = true;
         }
       )
     ;
