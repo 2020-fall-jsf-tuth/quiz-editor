@@ -22,4 +22,18 @@ export class AppComponent {
     this.selectedQuiz = quizToSelect;
   }
 
+  addNewQuiz() {
+    const newQuiz = {
+      name: "New Quiz"
+      , numberOfQuestions: 0
+    }
+
+    this.quizzes = [
+      ...this.quizzes
+      , newQuiz
+    ]
+
+    this.setSelectedQuiz(newQuiz);
+  }
+
 }
