@@ -20,7 +20,7 @@ export class AppComponent {
       .subscribe(
         (data) => {
           console.log(data);
-          //transform data to ignore unnec
+          //transform data to ignore unnecessary data
           this.quizzes = (data as any).map(x => ({
             name: x.name
             , questions: x.questions 
