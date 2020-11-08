@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <div class="btn btn-outline-success mt-3 mb-3">
+      <div class="btn btn-outline-success mt-3 mb-3" (click)="addNewQuiz()">
         Add New Quiz
       </div>
       <div class="card">
@@ -43,7 +43,7 @@
           General
         </div>
         <div class="card-body">
-          {{ selectedQuiz.name }}
+          <input [(ngModel)]="selectedQuiz.name" class="form-control">
         </div>
       </div>
       <div class="card mb-3">
