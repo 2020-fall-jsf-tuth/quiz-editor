@@ -34,7 +34,7 @@ export class AppComponent {
   addNewQuiz() {
     const newQuiz = {
       name: "Untitled Quiz"
-      , numberOfQuestions: 0
+      , numberOfQuestions: 14
     };
 
     this.quizzes = [
@@ -45,7 +45,7 @@ export class AppComponent {
     this.setSelectedQuiz(newQuiz);
   }
 
-  @ViewChild('myInputForAutoFocus') 
+  @ViewChild('myInputForAutoFocus')
   autoFocusInput: any;
 
 }
