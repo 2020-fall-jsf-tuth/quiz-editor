@@ -1,38 +1,34 @@
 import { Injectable } from '@angular/core';
 
 export interface QuizDisplay {
-  name: string
-  , numberOfQuiestions: number;
+  name: string;
+  numberOfQuestions: number;
 }
-
-
 
 @Injectable({
   providedIn: 'root'
 })
-
-
 export class QuizService {
 
   constructor() { }
 
   fetchQuizzes(): QuizDisplay[] {
 
-  return [
-  {
-    name: 'Quiz 1'
-  , numberOfQuiestions: 5
-},
-{
-  name: 'Quiz 2'
-  , numberOfQuiestions: 0
-},
-{
-  name: 'Quiz 1'
-  , numberOfQuiestions: 10
-}
-  ];
+    return [
+      {
+        name: 'Quiz 1'
+        , numberOfQuestions: 5
+      }
+      , {
+        name: 'Quiz 2'
+        , numberOfQuestions: 1
+      }
+      , {
+        name: 'Quiz 3'
+        , numberOfQuestions: 10
+      }
+    ];
 
-}
+  }
 
 }

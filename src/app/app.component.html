@@ -1,7 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <div class="btn btn-outline-success mt-3 mb-3">
+      <div
+        class="btn btn-outline-success mt-3 mb-3"
+        (click)="addNewQuiz()"
+      >
         Add New Quiz
       </div>
       <div class="card">
@@ -9,16 +12,29 @@
           <div
             class="list-group-item d-flex justify-content-between"
             *ngFor="let quiz of quizzes"
+            (click)="setSelectedQuiz(quiz)"
+            [class.active]="quiz == selectedQuiz"
           >
             {{ quiz.name }}
             <small class="font-italic font-weight-lighter">
-              {{ quiz.numberOfQuestions }} questions
+              {{ quiz.numberOfQuestions }} question<span *ngIf="quiz.numberOfQuestions != 1">s</span>
             </small>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div
+      class="col-md-8"
+      *ngIf="selectedQuiz == undefined"
+    >
+      <div class="alert alert-info my-3">
+        Select or add a new quiz to get started...
+      </div>
+    </div>
+    <div
+      class="col-md-8"
+      *ngIf="selectedQuiz != undefined"
+    >
       <div class="btn btn-outline-dark mt-3 mb-3">
         Save
       </div>
@@ -30,7 +46,11 @@
           General
         </div>
         <div class="card-body">
-          Coming Soon
+          <input
+            [(ngModel)]="selectedQuiz.name"
+            class="form-control"
+            #myInputForAutoFocus
+          />
         </div>
       </div>
       <div class="card mb-3">

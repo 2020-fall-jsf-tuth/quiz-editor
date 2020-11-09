@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { QuizService, QuizDisplay } from './quiz.service';
 
 @Component({
@@ -16,5 +16,36 @@ export class AppComponent {
     // Fetch quizzes here ! ! !
     this.quizzes = this.quizSvc.fetchQuizzes();
   }
+
+  selectedQuiz: QuizDisplay = undefined;
+
+  setSelectedQuiz(quizToSelect: QuizDisplay) {
+    this.selectedQuiz = quizToSelect;
+
+    setTimeout(
+      () => {
+        console.log(this.autoFocusInput);
+        this.autoFocusInput.nativeElement.select();
+      }
+      , 30
+    );
+  }
+
+  addNewQuiz() {
+    const newQuiz = {
+      name: "Untitled Quiz"
+      , numberOfQuestions: 0
+    };
+
+    this.quizzes = [
+      ...this.quizzes
+      , newQuiz
+    ];
+
+    this.setSelectedQuiz(newQuiz);
+  }
+
+  @ViewChild('myInputForAutoFocus')
+  autoFocusInput: any;
 
 }
