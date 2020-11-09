@@ -10,7 +10,7 @@ export interface QuizDisplay {
 })
 export class QuizService {
 
-  constructor() { }
+  constructor(private builtInAngularHttpClient: HttpClient) { }
 
   fetchQuizzes(): QuizDisplay[] {
 
