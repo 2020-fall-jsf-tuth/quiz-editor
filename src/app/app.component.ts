@@ -71,4 +71,14 @@ export class AppComponent implements OnInit {
 
   errorLoadingQuizzes = false;
 
+  removeQuestion(questionToRemove) {
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x != questionToRemove);
+  }
+
+  addNewQuestion() {
+    this.selectedQuiz.questions = [
+      ...this.selectedQuiz.questions
+      , { name: "Untitled Question" }
+    ];
+  }
 }
