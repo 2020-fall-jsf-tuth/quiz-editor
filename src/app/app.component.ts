@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { QuizService, QuizDisplay } from './quiz.service';
 
 @Component({
@@ -6,31 +6,36 @@ import { QuizService, QuizDisplay } from './quiz.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'quiz-editor';
 
   quizzes: QuizDisplay[] = [];
 
-  constructor(private quizSvc: QuizService) {
+  constructor(private quizSvc: QuizService) { }
 
-    // Fetch quizzes here ! ! !
-    this.quizSvc
-      .fetchQuizzes()
-      .subscribe(
-        (data) => {
-          console.log(data);
-          this.quizzes = (data as any).map(x => ({
-            name: x.name
-            , questions: x.questions
-          }));
-          this.errorLoadingQuizzes = false;
-        }
-        , (err) => {
-          console.error(err);
-          this.errorLoadingQuizzes = true;
-        }
-      )
-    ;
+  ngOnInit() {
+    this.loadQuizzes();
+  }
+
+  private loadQuizzes() {
+        // Fetch quizzes here ! ! !
+        this.quizSvc
+        .fetchQuizzes()
+        .subscribe(
+          (data) => {
+            console.log(data);
+            this.quizzes = (data as any).map(x => ({
+              name: x.name
+              , questions: x.questions
+            }));
+            this.errorLoadingQuizzes = false;
+          }
+          , (err) => {
+            console.error(err);
+            this.errorLoadingQuizzes = true;
+          }
+        )
+      ;
   }
 
   selectedQuiz: QuizDisplay = undefined;
