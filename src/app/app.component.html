@@ -1,15 +1,29 @@
 <div class="container">
-  <div class="row">
+  <div class="row"
+  *ngIf = "errorLoadingQuizzes"
+
+  >
+
+    <div class="col-md-12">
+      <div class="alert alert-danger mt-3">
+        Error Loading, Please refresh and try again...
+
+      </div>
+
+    </div>
+  </div>
+  <div class="row"
+  *ngIf = "!errorLoadingQuizzes">
     <div class="col-md-4">
-      <button 
+      <button
         class="btn btn-outline-success mt-3 mb-3"
-        (click)="addNewQuiz()" 
+        (click)="addNewQuiz()"
       >
         Add New Quiz
       </button>
       <div class="card">
         <div class="list-group list-group-flush">
-          <button 
+          <button
             class="list-group-item d-flex justify-content-between"
             *ngFor="let quiz of quizzes"
             (click)="setSelectedQuiz(quiz)"
@@ -23,7 +37,7 @@
         </div>
       </div>
     </div>
-    <div 
+    <div
       class="col-md-8"
       *ngIf="selectedQuiz == undefined"
     >
@@ -31,7 +45,7 @@
         Select or add a new quiz to get started...
       </div>
     </div>
-    <div 
+    <div
       class="col-md-8"
       *ngIf="selectedQuiz != undefined"
     >
