@@ -23,9 +23,12 @@ export class AppComponent {
             name: x.name
             , questions: x.questions
           }));
+          this.errorLoadingQuizzes=false;
         }
         , (err) => {
           console.error(err);
+          this.errorLoadingQuizzes=true;
+
         }
       )
     ;
@@ -62,4 +65,6 @@ export class AppComponent {
   @ViewChild('myInputForAutoFocus') 
   autoFocusInput: any;
 
+
+  errorLoadingQuizzes = false;
 }
