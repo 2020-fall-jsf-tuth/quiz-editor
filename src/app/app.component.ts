@@ -70,4 +70,17 @@ export class AppComponent implements OnInit {
   autoFocusInput: any;
 
   errorLoadingQuizzes = false;
+
+  removeQuestion(questionToRemove) {
+    this.selectedQuiz.questions = this.selectedQuiz.questions.filter(x => x != questionToRemove);
+  }
+
+  addNewQuestion() {
+    this.selectedQuiz.questions = [
+      ...this.selectedQuiz.questions
+      , {
+        name: "Untitled Question"
+      }
+    ];
+  }
 }
