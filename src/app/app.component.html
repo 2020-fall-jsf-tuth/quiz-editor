@@ -1,15 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <button 
+      <button
         class="btn btn-outline-success mt-3 mb-3"
-        (click)="addNewQuiz()" 
+        (click)="addNewQuiz()"
       >
         Add New Quiz
       </button>
       <div class="card">
         <div class="list-group list-group-flush">
-          <button 
+          <button
             class="list-group-item d-flex justify-content-between"
             *ngFor="let quiz of quizzes"
             (click)="setSelectedQuiz(quiz)"
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div 
+    <div
       class="col-md-8"
       *ngIf="selectedQuiz == undefined"
     >
@@ -31,7 +31,7 @@
         Select or add a new quiz to get started...
       </div>
     </div>
-    <div 
+    <div
       class="col-md-8"
       *ngIf="selectedQuiz != undefined"
     >
@@ -62,11 +62,33 @@
         </div>
       </div>
       <div class="card">
+        
         <div class="card-header">
           Other
         </div>
+
         <div class="card-body">
-          Coming soon
+          <button class="btn btn-outline-success">
+            Add New Question
+          </button>
+
+          <div class="form-group mt-3"
+            *ngIf="selectedQuiz.questions.length > 0">
+
+            <div class="row mt-3"
+              *ngFor="let question of selectedQuiz.questions">
+
+              <div class="col-md-10">
+                <input type="text" class="form-control">
+              </div>
+
+              <div class="col-md-2">
+                <button class="btn btn-link text-danger">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
