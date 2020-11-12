@@ -23,4 +23,13 @@ export class QuizService {
     return this.builtInAngularHttpClient.get("https://modern-js.azurewebsites.net/api/HttpTriggerJS1?code=8XD3vN3ehHLdZacBQJQhgUnNst9202gdd5VM3kWCytDkz2nXhia6kA==&name=Harry%20Potter");
   }
 
+  getMagicNumber(callerWantsThisToSucceed: boolean): Promise<number> {
+    return new Promise<number>(
+      (resolve, reject) => {
+        // Long running operation here
+        return callerWantsThisToSucceed ? resolve(42) : reject("Failed!");
+      }
+    );
+  }
+
 }

@@ -94,4 +94,73 @@ export class AppComponent implements OnInit {
   }
 
   loading = true;
+
+  jsPromisesOne() {
+
+    console.log('here');
+    const n = this.quizSvc.getMagicNumber(false);
+    console.log(n);
+
+    n
+      .then(
+        number => {
+          console.log(number);
+
+          // Get another magic number
+          const n2 = this.quizSvc.getMagicNumber(false);
+          console.log(n2); // ???
+
+          n2
+            .then(
+              x => console.log(x)
+            )
+            .catch(
+              x => console.error(x)
+            )
+          ;
+        }
+      )
+      .catch(
+        err => console.error(err)
+      )
+    ;
+  }
+
+  async jsPromisesTwo() {
+    
+    // 'await' cannot be a constant in an async/await method
+    // const await = 0;
+
+    try {
+      const n = await this.quizSvc.getMagicNumber(true);
+      console.log(n);  // ???
+
+      const n2 = await this.quizSvc.getMagicNumber(false);
+      console.log(n2);  // ???
+    }
+
+    catch(err) {
+      console.error(err);
+    }
+  }
+
+  async jsPromisesThree() {
+    
+    try {
+      const n = this.quizSvc.getMagicNumber(true);
+      console.log(n);  // ???
+
+      const n2 = this.quizSvc.getMagicNumber(true);
+      console.log(n2);  // ???
+
+      // const results = await Promise.all([n, n2]);
+      const results = await Promise.race([n, n2]);
+      console.log(results); // ???
+    }
+
+    catch(err) {
+      console.error(err);
+    }
+  }
+
 }
