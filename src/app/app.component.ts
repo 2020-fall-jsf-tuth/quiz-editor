@@ -18,6 +18,9 @@ export class AppComponent implements OnInit {
   }
 
   private loadQuizzes() {
+
+    this.loading = true;
+
     // Fetch quizzes here ! ! !
     this.quizSvc
       .fetchQuizzes()
@@ -28,10 +31,14 @@ export class AppComponent implements OnInit {
             name: x.name
             , questions: x.questions
           }));
+          
+          this.loading = false;
           this.errorLoadingQuizzes = false;
         }
         , (err) => {
           console.error(err);
+
+          this.loading = false;
           this.errorLoadingQuizzes = true;
         }
       )
@@ -83,4 +90,6 @@ export class AppComponent implements OnInit {
       }
     ];
   }
+
+  loading = true;
 }
