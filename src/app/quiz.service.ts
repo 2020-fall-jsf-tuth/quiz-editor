@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface QuizDisplay {
   name: string;
   questions: QuestionDisplay[];
+  markedForDelete: boolean;
 }
 
 export interface QuestionDisplay {

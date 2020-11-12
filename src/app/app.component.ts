@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
           this.quizzes = (data as any).map(x => ({
             name: x.name
             , questions: x.questions
+            , marekdForDelete: x.marekdForDelete
           }));
           
           this.loading = false;
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
     const newQuiz = {
       name: "Untitled Quiz"
       , questions: []
+      , markedForDelete: false
     };
 
     this.quizzes = [
