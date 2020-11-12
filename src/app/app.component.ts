@@ -94,4 +94,70 @@ export class AppComponent implements OnInit {
   }
 
   loading = true;
+
+  jsPromisesOne() {
+    const n = this.quizSvc.getMagicNumber(true);
+    console.log(n);
+    //What you want to do after promise evaluates...
+    n
+      .then(
+        number => {
+          console.log(number);
+
+          //Get another magic number
+          const n2 = this.quizSvc.getMagicNumber(false);
+          console.log(n2); // ???
+
+          n2
+            .then(
+              x => console.log(x)
+            )
+            .catch(
+              x => console.error(x)
+            )
+          ;
+        }
+      )
+      .catch(
+        err => console.log(err)
+      )  
+    ;
+  }
+
+  async jsPromisesTwo() {
+    //await takes care of all the then stuff
+
+    try {
+
+      const n = await this.quizSvc.getMagicNumber(true);
+      console.log(n); // ? ? ? 
+
+      const n2 = await this.quizSvc.getMagicNumber(true);
+      console.log(n2);
+    }
+
+    catch(err) {
+      console.error(err);
+    }
+  }
+
+  async jsPromisesThree() {
+    //await takes care of all the then stuff
+    try {
+
+      const n = this.quizSvc.getMagicNumber(true);
+      console.log(n); // ? ? ? 
+
+      const n2 = this.quizSvc.getMagicNumber(true);
+      console.log(n2);
+
+      //This runs code in parallel
+      const results = await Promise.all([n, n2]);
+      console.log(results);
+    }
+
+    catch(err) {
+      console.error(err);
+    }
+  }
 }
