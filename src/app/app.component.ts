@@ -31,6 +31,8 @@ export class AppComponent implements OnInit {
             name: x.name
             , questions: x.questions
             , markedForDelete: false
+            , newlyAdded: false
+            , naiveChecksum: this.generateNaiveChecksum(x)
           }));
           
           this.loading = false;
@@ -44,6 +46,45 @@ export class AppComponent implements OnInit {
         }
       )
     ;    
+  }
+
+  generateNaiveChecksum(quiz: QuizDisplay): string {
+    return quiz.name + quiz.questions.map(x => '~' + x.name).join('');
+    //
+    // For example...
+    //
+    // "Quiz 1b~To be, or not to be?~Yes or no?"
+  }
+
+  getDeletedQuizzes(): QuizDisplay[] {
+    return this.quizzes.filter(x => x.markedForDelete);
+  }
+
+  get DeletedQuizCount(): number {
+    return this.getDeletedQuizzes().length;
+  }
+
+  getAddedQuizzes(): QuizDisplay[] {
+    return this.quizzes.filter(x => 
+      !x.markedForDelete 
+      && x.newlyAdded
+    );
+  }
+
+  get AddedQuizCount(): number {
+    return this.getAddedQuizzes().length;
+  }
+
+  getEditedQuizzes(): QuizDisplay[] {
+    return this.quizzes.filter(x => 
+      !x.markedForDelete 
+      && !x.newlyAdded 
+      && this.generateNaiveChecksum(x) != x.naiveChecksum
+    );
+  }
+
+  get EditedQuizCount(): number {
+    return this.getEditedQuizzes().length;
   }
 
   selectedQuiz: QuizDisplay = undefined;
@@ -65,6 +106,8 @@ export class AppComponent implements OnInit {
       name: "Untitled Quiz"
       , questions: []
       , markedForDelete: false
+      , newlyAdded: true
+      , naiveChecksum: ""
     };
 
     this.quizzes = [

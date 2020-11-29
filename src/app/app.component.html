@@ -79,7 +79,28 @@
       *ngIf="selectedQuiz != undefined"
     >
       <button class="btn btn-outline-dark mt-3 mb-3">
-        Save
+         Save Quizzes
+         <span
+            *ngIf="DeletedQuizCount > 0"
+            class="badge badge-danger"
+            [title]="DeletedQuizCount + ' quizzes will be deleted'"
+         >
+           -{{ DeletedQuizCount }}
+         </span>
+         <span
+            *ngIf="AddedQuizCount > 0"
+            class="badge badge-success ml-1"
+            [title]="AddedQuizCount + ' quizzes will be added'"
+         >
+           +{{ AddedQuizCount }}
+         </span>
+         <span
+          *ngIf="EditedQuizCount > 0"
+          class="badge badge-light ml-1"
+          [title]="EditedQuizCount + ' quizzes will be updated'"
+        >
+          *{{ EditedQuizCount }}
+        </span>
       </button>
       <button class="btn btn-link mt-3 mb-3">
         Cancel
