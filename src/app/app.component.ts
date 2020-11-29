@@ -87,6 +87,11 @@ export class AppComponent implements OnInit {
     return this.getEditedQuizzes().length;
   }
 
+  cancelAllBatchEdits() {
+    this.loadQuizzes();
+    this.selectedQuiz = undefined;
+  }
+
   selectedQuiz: QuizDisplay = undefined;
 
   setSelectedQuiz(quizToSelect: QuizDisplay) {
