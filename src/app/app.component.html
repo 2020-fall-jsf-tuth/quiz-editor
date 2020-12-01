@@ -89,9 +89,15 @@
         <span 
         class="badge badge-success ml-1"
         *ngIf="AddedQuizCount > 0"
-      >
-        +{{ AddedQuizCount }}
-      </span>
+        >
+          +{{ AddedQuizCount }}
+        </span>
+        <span 
+        class="badge badge-light ml-1"
+        *ngIf="EditedQuizCount > 0"
+        >
+          *{{ EditedQuizCount }}
+        </span>        
       </button>
       <button 
         class="btn btn-link mt-3 mb-3"
