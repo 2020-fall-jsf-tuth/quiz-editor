@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
             name: x.name
             , questions: x.questions
             , markedForDelete: false
+            , newlyAdded: true
           }));
           
           this.loading = false;
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit {
       name: "Untitled Quiz"
       , questions: []
       , markedForDelete: false
+      , newlyAdded: true
     };
 
     this.quizzes = [
@@ -185,5 +187,13 @@ export class AppComponent implements OnInit {
 
   get DeletedQuizCount(): number {
     return this.getDeletedQuizzes().length;
+  }
+
+  private getAddedQuizzes(): QuizDisplay[] {
+    return this.quizzes.filter(x => x.newlyAdded && !x.markedForDelete);
+  }
+
+  get AddedQuizCount(): number {
+    return this.getAddedQuizzes().length;
   }
 }
