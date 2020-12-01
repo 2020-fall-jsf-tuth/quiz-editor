@@ -18,13 +18,12 @@ export class AppComponent implements OnInit {
   }
 
   cancelAllBatchEdits() {
-    //Reload all quizzes
+    
+    // Reload all the quizzes.
     this.loadQuizzes();
 
-    //Make sure no quiz is selected
+    // Make sure no quiz is currently selected.
     this.setSelectedQuiz(undefined);
-    //this.setSelectedQuiz = undefined;
-
   }
 
   private loadQuizzes() {
@@ -41,7 +40,7 @@ export class AppComponent implements OnInit {
             name: x.name
             , questions: x.questions
             , markedForDelete: false
-            , newlyAdded: true
+            , newlyAdded: false
           }));
           
           this.loading = false;
