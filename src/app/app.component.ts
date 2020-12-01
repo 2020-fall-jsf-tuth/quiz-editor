@@ -17,6 +17,16 @@ export class AppComponent implements OnInit {
     this.loadQuizzes();
   }
 
+  cancelAllBatchEdits() {
+    //Reload all quizzes
+    this.loadQuizzes();
+
+    //Make sure no quiz is selected
+    this.setSelectedQuiz(undefined);
+    //this.setSelectedQuiz = undefined;
+
+  }
+
   private loadQuizzes() {
 
     this.loading = true;
@@ -167,5 +177,13 @@ export class AppComponent implements OnInit {
     catch (err) {
       console.error(err);
     }
+  }
+
+  private getDeletedQuizzes(): QuizDisplay[] {
+    return this.quizzes.filter(x => x.markedForDelete);
+  }
+
+  get DeletedQuizCount(): number {
+    return this.getDeletedQuizzes().length;
   }
 }
