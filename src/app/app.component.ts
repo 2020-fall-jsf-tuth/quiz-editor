@@ -216,4 +216,23 @@ export class AppComponent implements OnInit {
     return this.getEditedQuizzes().length;
   }
 
+  saveBatchEdits() {
+
+    const editedQuizzes = this.getEditedQuizzes();
+
+    const newQuizzes = this.getAddedQuizzes()
+      .map(x =>({
+        quizName: x.name
+        , quizQuestions: x.questions.map(y => y.name) // Map the quiz questions to a string array.
+      })
+    );
+
+    this.quizSvc.saveQuizzes(
+      editedQuizzes
+      , newQuizzes
+    ).subscribe(
+      data => console.log(`Web service saved ${data} edited quizzes`)
+      , err => console.error(err)
+    );
+  }
 }
