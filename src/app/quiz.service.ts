@@ -6,6 +6,7 @@ export interface QuizDisplay {
   name: string;
   questions: QuestionDisplay[];
   markedForDelete: boolean;
+  newlyAdded: boolean;
 }
 
 export interface QuestionDisplay {
