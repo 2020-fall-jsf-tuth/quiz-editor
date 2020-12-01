@@ -82,7 +82,6 @@
         Save quizzes
         <span class="badge badge-danger m1-1"
             *ngIf="DeletedQuizCount > 0"
-
         >
           -{{DeletedQuizCount}}
         </span>
@@ -91,8 +90,13 @@
         >
           +{{AddQuizCount}}
         </span>
-
+      <span class="badge badge-light m1-1"
+          *ngIf="EditedQuizCount > 0"
+      >
+        +{{EditedQuizCount}}
+      </span>
       </button>
+
       <button
       class="btn btn-link mt-3 mb-3"
       (click) ="cancelAllBatchEdits()">

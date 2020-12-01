@@ -7,6 +7,7 @@ export interface QuizDisplay {
   questions: QuestionDisplay[];
   markedForDelete: boolean;
   newlyAdded: boolean;
+  naiveChecksum: string;
 }
 
 export interface QuestionDisplay {
