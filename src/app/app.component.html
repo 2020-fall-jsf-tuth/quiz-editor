@@ -92,6 +92,14 @@
         >
           +{{ AddedQuizCount }}
         </span>
+
+        <span
+        class="badge badge-light ml-1"
+        *ngIf="EditedQuizCount > 0"
+        >
+          *{{ EditedQuizCount }}
+        </span>
+
       </button>
       <button class="btn btn-link mt-3 mb-3" (click)="cancelAllBatchEdits()">
         Cancel
