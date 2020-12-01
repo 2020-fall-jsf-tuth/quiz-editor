@@ -17,6 +17,14 @@ export class AppComponent implements OnInit {
     this.loadQuizzes();
   }
 
+  cancelAllBatchEdits() {
+    //Reload all the loadQuizzes
+    this.loadQuizzes();
+
+    this.setSelectedQuiz(undefined);
+    this.selectedQuiz = undefined;
+  }
+
   private loadQuizzes() {
 
     this.loading = true;
@@ -32,7 +40,7 @@ export class AppComponent implements OnInit {
             , questions: x.questions
             , markedForDelete: false
           }));
-          
+
           this.loading = false;
           this.errorLoadingQuizzes = false;
         }
@@ -43,7 +51,7 @@ export class AppComponent implements OnInit {
           this.errorLoadingQuizzes = true;
         }
       )
-    ;    
+    ;
   }
 
   selectedQuiz: QuizDisplay = undefined;
@@ -75,7 +83,7 @@ export class AppComponent implements OnInit {
     this.setSelectedQuiz(newQuiz);
   }
 
-  @ViewChild('myInputForAutoFocus') 
+  @ViewChild('myInputForAutoFocus')
   autoFocusInput: any;
 
   errorLoadingQuizzes = false;
@@ -129,7 +137,7 @@ export class AppComponent implements OnInit {
   }
 
   async jsPromisesTwo() {
-    
+
     //
     // 'await' can't be a constant in an async method...
     // But it could if not async...
@@ -141,7 +149,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = await this.quizSvc.getMagicNumber(false);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
     }
 
     catch (err) {
@@ -156,7 +164,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = this.quizSvc.getMagicNumber(true);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
 
       // This runs code in parallel ! ! !
       const results = await Promise.all([n, n2]);
