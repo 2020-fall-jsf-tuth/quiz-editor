@@ -83,18 +83,21 @@
         <span 
           class="badge badge-danger ml-1"
           *ngIf="DeletedQuizCount > 0"
+          [title]="DeletedQuizCount + (DeletedQuizCount != 1 ? ' quizzes will be deleted' : ' quiz will be deleted')"
         >
           -{{ DeletedQuizCount }}
         </span>
         <span 
           class="badge badge-success ml-1"
           *ngIf="AddedQuizCount > 0"
+          [title]="AddedQuizCount + (AddedQuizCount != 1 ? ' quizzes will be added' : ' quiz will be added')"
         >
           +{{ AddedQuizCount }}
         </span>
         <span 
           class="badge badge-light ml-1"
           *ngIf="EditedQuizCount > 0"
+          [title]="EditedQuizCount + (EditedQuizCount != 1 ? ' quizzes will be updated' : ' quiz will be updated')"
         >
           *{{ EditedQuizCount }}
         </span>
