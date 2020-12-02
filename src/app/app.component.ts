@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
 
     //Make sure no quiz is currently selected.
     this.setSelectedQuiz(undefined);
+    // this.selectedQuiz = undefined;
   }
 
   private loadQuizzes() {
@@ -186,12 +187,6 @@ export class AppComponent implements OnInit {
     return this.getDeletedQuizzes().length;
   }
 
-  private getAddedQuizzes(): QuizDisplay[] {
-    return this.quizzes.filter(x => x.newlyAdded);
-  }
-  get AddedQuizzes(): number {
-   
-    return this.getDeletedQuizzes().length;
-  }
+  
 
 }
