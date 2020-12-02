@@ -17,6 +17,14 @@ export class AppComponent implements OnInit {
     this.loadQuizzes();
   }
 
+  cancelAllBatchEdits() {
+    //reload quizzes
+    this.loadQuizzes();
+
+    //deselect all quizzes
+    this.setSelectedQuiz(undefined);
+  }
+
   private loadQuizzes() {
 
     this.loading = true;
