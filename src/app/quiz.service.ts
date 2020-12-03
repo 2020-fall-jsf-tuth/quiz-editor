@@ -14,6 +14,16 @@ export interface QuestionDisplay {
   name: string;
 }
 
+export interface QuirkyShapeForSavingEditedQuizzes {
+  quiz: string;
+  questions: { question: string; }[];
+}
+
+export interface QuirkyShapeForSavingNewQuizzes {
+  quizName: string;
+  quizQuestions: string[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,7 +45,11 @@ export class QuizService {
       }
     );
   }
-  saveQuizzes(changedQuizzes: any[], newQuizzes: any[] = []) {
+
+  saveQuizzes(
+    changedQuizzes: QuirkyShapeForSavingEditedQuizzes[]
+    , newQuizzes: QuirkyShapeForSavingNewQuizzes[] = []
+  ) {
 
     let h = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -58,3 +72,4 @@ export class QuizService {
     );
   }
 }
+

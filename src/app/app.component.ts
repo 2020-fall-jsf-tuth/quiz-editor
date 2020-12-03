@@ -218,7 +218,15 @@ export class AppComponent implements OnInit {
 
   saveBatchEdits() {
 
-    const editedQuizzes = this.getEditedQuizzes();
+    console.log(this.getEditedQuizzes());
+
+    const editedQuizzes = this.getEditedQuizzes()
+      .map(x => ({
+        quiz: x.name
+        , questions: x.questions.map(y=> ({ question: y.name}))
+      }));
+
+    console.log(editedQuizzes);
 
     const newQuizzes = this.getAddedQuizzes()
       .map(x =>({
