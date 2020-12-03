@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   }
 
   cancelAllBatchEdits() {
-    
+
     // Reload all the quizzes.
     this.loadQuizzes();
 
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
             , newlyAdded: false
             , naiveChecksum: this.generateNaiveChecksum(x)
           }));
-          
+
           this.loading = false;
           this.errorLoadingQuizzes = false;
         }
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
           this.errorLoadingQuizzes = true;
         }
       )
-    ;    
+    ;
   }
 
   selectedQuiz: QuizDisplay = undefined;
@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
     this.setSelectedQuiz(newQuiz);
   }
 
-  @ViewChild('myInputForAutoFocus') 
+  @ViewChild('myInputForAutoFocus')
   autoFocusInput: any;
 
   errorLoadingQuizzes = false;
@@ -142,7 +142,7 @@ export class AppComponent implements OnInit {
   }
 
   async jsPromisesTwo() {
-    
+
     //
     // 'await' can't be a constant in an async method...
     // But it could if not async...
@@ -154,7 +154,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = await this.quizSvc.getMagicNumber(false);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
     }
 
     catch (err) {
@@ -169,7 +169,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = this.quizSvc.getMagicNumber(true);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
 
       // This runs code in parallel ! ! !
       const results = await Promise.all([n, n2]);
@@ -205,8 +205,8 @@ export class AppComponent implements OnInit {
   }
 
   private getEditedQuizzes(): QuizDisplay[] {
-    return this.quizzes.filter(x => 
-      !x.newlyAdded 
+    return this.quizzes.filter(x =>
+      !x.newlyAdded
       && !x.markedForDelete
       && this.generateNaiveChecksum(x) != x.naiveChecksum
     );
@@ -214,6 +214,26 @@ export class AppComponent implements OnInit {
 
   get EditedQuizCount(): number {
     return this.getEditedQuizzes().length;
+  }
+
+  saveAllBatchEdits() {
+
+    const changedQuizzes = this.getEditedQuizzes().map(x => ({
+      quiz: x.name
+      , questions: x.questions.map(y => ({
+        question: y.name
+      }))
+    }));
+    const newQuizzes = [];
+
+    this.quizSvc.saveQuizzes(
+      changedQuizzes
+      , newQuizzes
+    )
+    .subscribe(
+      numberOfEditedQuizzesSaved => console.log(`${numberOfEditedQuizzesSaved} edited quizzes were saved to the cloud...`)
+      , err => console.error(err)
+    );
   }
 
 }
