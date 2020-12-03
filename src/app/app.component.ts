@@ -226,9 +226,13 @@ export class AppComponent implements OnInit {
     }));
 
     console.log(changedQuizzes);
-    
-    //slack and tell
-    const newQuizzes = [];
+
+    //!!!!!   SLACK AND TELL   !!!!!!
+
+    const newQuizzes = this.getAddedQuizzes().map(x => ({ 
+      quizName: x.name 
+      , quizQuestions: x.questions.map(y => y.name) 
+    }))
 
     this.quizSvc
       .saveQuizzes(
