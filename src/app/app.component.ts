@@ -216,4 +216,28 @@ export class AppComponent implements OnInit {
     return this.getEditedQuizzes().length;
   }
 
+  saveAllBatchEdits() {
+
+    console.log(this.getEditedQuizzes());
+
+    const changedQuizzes = this.getEditedQuizzes().map(x => ({
+      quiz: x.name, questions: x.questions.map(y => ({ question: y.name }))
+    }));
+    
+    console.log(changedQuizzes);
+
+    const newQuizzes = [];  // work on this one for Slack-n-tell week 14
+
+    this.quizSvc
+      .saveQuizzes(
+        changedQuizzes
+        , newQuizzes
+      )
+      .subscribe(
+        numberOfEditedQuizzesSaved => console.log(`${numberOfEditedQuizzesSaved} edited quizzes were saved to the cloud...`)
+        , err => console.error(err)
+      )
+    ;
+  }
+
 }
