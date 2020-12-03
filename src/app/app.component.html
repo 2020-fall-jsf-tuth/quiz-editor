@@ -78,7 +78,10 @@
       class="col-md-8"
       *ngIf="selectedQuiz != undefined"
     >
-      <button class="btn btn-outline-dark mt-3 mb-3">
+      <button 
+      class="btn btn-outline-dark mt-3 mb-3"
+      (click)="saveAllBatchEdits()"
+      >
         Save Quizzes
         <span 
           class="badge badge-danger ml-1"
