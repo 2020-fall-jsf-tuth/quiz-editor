@@ -216,4 +216,30 @@ export class AppComponent implements OnInit {
     return this.getEditedQuizzes().length;
   }
 
+  saveAllBatchEdits() {
+
+    console.log(this.getEditedQuizzes());
+    //nested maping use y so it doesn't interfere with x
+    const changedQuizzes = this.getEditedQuizzes().map(x => ({
+      quiz: x.name
+      , questions: x.questions.map(y => ({ question: y.name}))
+    }));
+
+    console.log(changedQuizzes);
+    
+    //slack and tell
+    const newQuizzes = [];
+
+    this.quizSvc
+      .saveQuizzes(
+        changedQuizzes
+        , newQuizzes
+      ).subscribe(
+        numberOfEditedQuizzesSaved => console.log(`${numberOfEditedQuizzesSaved} edited quizzes were saved to cloud`)
+        , err => console.error(err)
+      )
+    ;
+
+  }
+
 }
