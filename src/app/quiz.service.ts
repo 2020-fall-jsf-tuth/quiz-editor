@@ -14,6 +14,11 @@ export interface QuestionDisplay {
   name: string;
 }
 
+export interface QuirkyShapeForSavingEditedQuizzes {
+  quiz: string;
+  questions: { question: string; }[];
+}
+
 export interface QuirkyShapeForSavingNewQuizzes {
   quizName: string;
   quizQuestions: string[];
@@ -42,7 +47,7 @@ export class QuizService {
   }
 
   saveQuizzes(
-    changedQuizzes: QuizDisplay[]
+    changedQuizzes: QuirkyShapeForSavingEditedQuizzes[]
     , newQuizzes: QuirkyShapeForSavingNewQuizzes[] = []
   ) {
 
