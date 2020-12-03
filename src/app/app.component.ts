@@ -217,23 +217,37 @@ export class AppComponent implements OnInit {
   }
 
   saveAllBatchEdits() {
-    console.log(this.getEditedQuizzes());
+    // console.log(this.getEditedQuizzes());
     const changedQuizzes = this.getEditedQuizzes().map(x => ({
       quiz: x.name
       , questions: x.questions.map(y => ({question: y.name}))
     }));
-    const newQuizzes = [];
-  console.log(changedQuizzes);
+    const newQuizzes = this.getAddedQuizzes().map(x => ({
+      quizName: x.name, 
+      quizQuestions: x.questions.map(y => y.name)
+    }));
 
+  
     this.quizSvc
       .saveQuizzes(
         changedQuizzes
       , newQuizzes
     )
       .subscribe(
-        numberOfEditedQuizzesSaved => console.log(`${numberOfEditedQuizzesSaved} edited quizzes were saved to the cloud`)
+        y => console.log(`${y} edited quizzes were saved to the cloud`)
         , err => console.log(err)
       );
   }
 
 }
+
+
+// this.quizSvc
+// .saveQuizzes(
+//   changedQuizzes
+// , newQuizzes
+// )
+// .subscribe(
+//   numberOfEditedQuizzesSaved => console.log(`${numberOfEditedQuizzesSaved} edited quizzes were saved to the cloud`)
+//   , err => console.log(err)
+// );
