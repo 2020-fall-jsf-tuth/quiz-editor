@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
 
   quizzes: QuizDisplay[] = [];
 
+  //Constructor used for dependency injection of our quiz service
+  constructor(private quizSvc: QuizService) {
   constructor(private quizSvc: QuizService) { }
 
   ngOnInit() {
@@ -18,7 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   cancelAllBatchEdits() {
-    
+
     // Reload all the quizzes.
     this.loadQuizzes();
 
@@ -43,7 +45,7 @@ export class AppComponent implements OnInit {
             , newlyAdded: false
             , naiveChecksum: this.generateNaiveChecksum(x)
           }));
-          
+
           this.loading = false;
           this.errorLoadingQuizzes = false;
         }
@@ -54,11 +56,13 @@ export class AppComponent implements OnInit {
           this.errorLoadingQuizzes = true;
         }
       )
-    ;    
+    ;
   }
 
+  //Don't show quiz information unless a user selects the quiz
   selectedQuiz: QuizDisplay = undefined;
 
+  //Show quiz object information when user clicks on quiz
   setSelectedQuiz(quizToSelect: QuizDisplay) {
     this.selectedQuiz = quizToSelect;
 
@@ -88,7 +92,7 @@ export class AppComponent implements OnInit {
     this.setSelectedQuiz(newQuiz);
   }
 
-  @ViewChild('myInputForAutoFocus') 
+  @ViewChild('myInputForAutoFocus')
   autoFocusInput: any;
 
   errorLoadingQuizzes = false;
@@ -104,6 +108,23 @@ export class AppComponent implements OnInit {
         name: "Untitled Question"
       }
     ];
+  }
+
+  addQuiz() {
+    //Creating a new quiz object
+    const newQuiz = {
+      name: "Untitled Quiz",
+      numberOfQuestions: 0
+    };
+
+    //spread in all current quiz list objects and add the newly created quiz
+    this.quizzes = [
+      ...this.quizzes,
+      newQuiz
+    ];
+
+    //Make new quiz the selected quiz to edit by calling setSelectedQuiz(send it new quiz)
+    this.setSelectedQuiz(newQuiz);
   }
 
   loading = true;
@@ -142,7 +163,7 @@ export class AppComponent implements OnInit {
   }
 
   async jsPromisesTwo() {
-    
+
     //
     // 'await' can't be a constant in an async method...
     // But it could if not async...
@@ -154,7 +175,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = await this.quizSvc.getMagicNumber(false);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
     }
 
     catch (err) {
@@ -169,7 +190,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = this.quizSvc.getMagicNumber(true);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
 
       // This runs code in parallel ! ! !
       const results = await Promise.all([n, n2]);
@@ -205,8 +226,8 @@ export class AppComponent implements OnInit {
   }
 
   private getEditedQuizzes(): QuizDisplay[] {
-    return this.quizzes.filter(x => 
-      !x.newlyAdded 
+    return this.quizzes.filter(x =>
+      !x.newlyAdded
       && !x.markedForDelete
       && this.generateNaiveChecksum(x) != x.naiveChecksum
     );

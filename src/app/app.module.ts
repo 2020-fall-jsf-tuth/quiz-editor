@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent
   ],
   imports: [
+    BrowserModule
+    ,NgbModule
+    ,FormsModule
     BrowserModule,
     NgbModule,
     FormsModule,
