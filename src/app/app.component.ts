@@ -231,7 +231,7 @@ export class AppComponent implements OnInit {
     this.quizSvc
       .saveQuizzes(
         changedQuizzes
-        , newQuizzes
+        , newQuizzes  // look for errors here for week 14 slack-n-tell
       )
       .subscribe(
         numberOfEditedQuizzesSaved => console.log(`${numberOfEditedQuizzesSaved} edited quizzes were saved to the cloud...`)
