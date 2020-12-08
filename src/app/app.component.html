@@ -82,10 +82,15 @@
       <div
         *ngIf="selectedQuiz != undefined"
       >
-        <button 
-        class="btn btn-outline-dark mt-3 mb-3"
-        (click)="saveAllBatchEdits()"
+      <div
+        [@pulseSaveCancelButtons]="DeletedQuizCount + AddedQuizCount + EditedQuizCount == 0 ? 'nothingToSave' : 'somethingToSave' "
       >
+        <button 
+          class="btn mt-3 mb-3"
+          (click)="saveAllBatchEdits()"
+          [class.btn-dark]="DeletedQuizCount + AddedQuizCount + EditedQuizCount > 0"
+          [class.btn-outline-dark]="DeletedQuizCount + AddedQuizCount + EditedQuizCount == 0"
+        >
         Save Quizzes
         <span 
           class="badge badge-danger ml-1"
@@ -115,6 +120,7 @@
       >
         Cancel
         </button>
+      </div>
         <div class="card mb-3">
         <div class="card-header">
           General
