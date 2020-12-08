@@ -76,9 +76,13 @@
     </div>
     <div 
       class="col-md-8"
-      *ngIf="selectedQuiz != undefined"
+      [@detailsFromLeft]="detailsFromLeftAnimationState"
+      (@detailsFromLeft.done)="detailsFromLeftAnimationDone()"
     >
-      <button 
+      <div
+        *ngIf="selectedQuiz != undefined"
+      >
+        <button 
         class="btn btn-outline-dark mt-3 mb-3"
         (click)="saveAllBatchEdits()"
       >
@@ -104,14 +108,14 @@
         >
           *{{ EditedQuizCount }}
         </span>
-      </button>
-      <button 
+        </button>
+        <button 
         class="btn btn-link mt-3 mb-3"
         (click)="cancelAllBatchEdits()"
       >
         Cancel
-      </button>
-      <div class="card mb-3">
+        </button>
+        <div class="card mb-3">
         <div class="card-header">
           General
         </div>
@@ -122,8 +126,8 @@
             #myInputForAutoFocus
           />
         </div>
-      </div>
-      <div class="card mb-3">
+        </div>
+        <div class="card mb-3">
         <div class="card-header">
           Questions
         </div>
@@ -160,8 +164,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="card">
+        </div>
+        <div class="card">
         <div class="card-header">
           Other
         </div>
@@ -179,6 +183,7 @@
               Mark for Delete
             </label>
           </div>
+        </div>
         </div>
       </div>
     </div>
