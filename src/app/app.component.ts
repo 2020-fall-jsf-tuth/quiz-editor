@@ -224,11 +224,16 @@ export class AppComponent implements OnInit {
       , questions: x.questions.map(y => y.name)
     }));
     //this is for newlyAdded Quizzes
-    console.log(this.getEditedQuizzes);
-    const newQuizzes = this.getEditedQuizzes().map(x => ({
-      quiz: x.quiz
-      , questions: x.questions.map(y=> y.name)
-    }));
+    // console.log(this.getEditedQuizzes);
+    // const newQuizzes = this.getEditedQuizzes().map(x => ({
+    //   quiz: x.quiz
+    //   , questions: x.questions.map(y=> y.name)
+    // }));
+    const newQuizzes = this.getAddedQuizzes().map(x =>({
+        quizName: x.name
+        , quizQuestions: x.questions.map(y => y.name)
+      })
+    );
       console.log(this.getEditedQuizzes);
     this.quizSvc
     .saveQuizzes(
