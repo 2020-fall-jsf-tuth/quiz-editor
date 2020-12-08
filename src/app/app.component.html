@@ -82,39 +82,45 @@
       <div
         *ngIf="selectedQuiz != undefined"
       >
-        <button 
-        class="btn btn-outline-dark mt-3 mb-3"
-        (click)="saveAllBatchEdits()"
-      >
-        Save Quizzes
-        <span 
-          class="badge badge-danger ml-1"
-          *ngIf="DeletedQuizCount > 0"
-          [title]="DeletedQuizCount + (DeletedQuizCount != 1 ? ' quizzes will be deleted' : ' quiz will be deleted')"
+        <div
+          [@pulseSaveCancelButtons]="DeletedQuizCount + AddedQuizCount + EditedQuizCount == 0 ? 'nothingToSave' : 'somethingToSave'"
         >
-          -{{ DeletedQuizCount }}
-        </span>
-        <span 
-          class="badge badge-success ml-1"
-          *ngIf="AddedQuizCount > 0"
-          [title]="AddedQuizCount + (AddedQuizCount != 1 ? ' quizzes will be added' : ' quiz will be added')"
-        >
-          +{{ AddedQuizCount }}
-        </span>
-        <span 
-          class="badge badge-light ml-1"
-          *ngIf="EditedQuizCount > 0"
-          [title]="EditedQuizCount + (EditedQuizCount != 1 ? ' quizzes will be updated' : ' quiz will be updated')"
-        >
-          *{{ EditedQuizCount }}
-        </span>
-        </button>
-        <button 
-          class="btn btn-link mt-3 mb-3"
-          (click)="cancelAllBatchEdits()"
-        >
-          Cancel
-        </button>
+          <button 
+            class="btn mt-3 mb-3"
+            (click)="saveAllBatchEdits()"
+            [class.btn-dark]="DeletedQuizCount + AddedQuizCount + EditedQuizCount > 0"
+            [class.btn-outline-dark]="DeletedQuizCount + AddedQuizCount + EditedQuizCount == 0"
+          >
+            Save Quizzes
+            <span 
+              class="badge badge-danger ml-1"
+              *ngIf="DeletedQuizCount > 0"
+              [title]="DeletedQuizCount + (DeletedQuizCount != 1 ? ' quizzes will be deleted' : ' quiz will be deleted')"
+            >
+              -{{ DeletedQuizCount }}
+            </span>
+            <span 
+              class="badge badge-success ml-1"
+              *ngIf="AddedQuizCount > 0"
+              [title]="AddedQuizCount + (AddedQuizCount != 1 ? ' quizzes will be added' : ' quiz will be added')"
+            >
+              +{{ AddedQuizCount }}
+            </span>
+            <span 
+              class="badge badge-light ml-1"
+              *ngIf="EditedQuizCount > 0"
+              [title]="EditedQuizCount + (EditedQuizCount != 1 ? ' quizzes will be updated' : ' quiz will be updated')"
+            >
+              *{{ EditedQuizCount }}
+            </span>
+          </button>
+          <button 
+            class="btn btn-link mt-3 mb-3"
+            (click)="cancelAllBatchEdits()"
+          >
+            Cancel
+          </button>
+        </div>
         <div class="card mb-3">
           <div class="card-header">
             General
