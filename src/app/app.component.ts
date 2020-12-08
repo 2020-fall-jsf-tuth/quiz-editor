@@ -1,12 +1,47 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { QuizService, QuizDisplay } from './quiz.service';
+import {
+  trigger,
+  transition,
+  animate,
+  keyframes,
+  style
+ } from "@angular/animations";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+  trigger('detailsFromLeft', [
+    transition('leftPosition => finalPosition', [
+      animate('300ms', keyframes([
+        style({ left: '-30px', offset: 0.0 }),
+        style({ left: '-20px', offset: 0.25 }),
+        style({ left: '-10px', offset: 0.5 }),
+        style({ left: '-5px', offset: 0.75 }),
+        style({ left: '0px', offset: 1.0 })
+      ]))
+    ]),
+  ]),
+  trigger('pulseSaveCancelButtons', [
+    transition('nothingToSave => somethingToSave', [
+      animate('400ms', keyframes([
+        style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+        style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
+        style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+      ]))
+    ])
+  ])
+]
 })
 export class AppComponent implements OnInit {
+
+detailsFromLeftAnimationState = "leftPosition";
+detailsFromLeftAnimationDone() {
+  this.detailsFromLeftAnimationState = "finalPosition";
+}
+
   title = 'quiz-editor';
 
   quizzes: QuizDisplay[] = [];
@@ -18,7 +53,7 @@ export class AppComponent implements OnInit {
   }
 
   cancelAllBatchEdits() {
-    
+
     // Reload all the quizzes.
     this.loadQuizzes();
 
@@ -43,7 +78,7 @@ export class AppComponent implements OnInit {
             , newlyAdded: false
             , naiveChecksum: this.generateNaiveChecksum(x)
           }));
-          
+
           this.loading = false;
           this.errorLoadingQuizzes = false;
         }
@@ -54,13 +89,14 @@ export class AppComponent implements OnInit {
           this.errorLoadingQuizzes = true;
         }
       )
-    ;    
+    ;
   }
 
   selectedQuiz: QuizDisplay = undefined;
 
   setSelectedQuiz(quizToSelect: QuizDisplay) {
     this.selectedQuiz = quizToSelect;
+    this.detailsFromLeftAnimationState = "leftPosition";
 
     setTimeout(
       () => {
@@ -88,7 +124,7 @@ export class AppComponent implements OnInit {
     this.setSelectedQuiz(newQuiz);
   }
 
-  @ViewChild('myInputForAutoFocus') 
+  @ViewChild('myInputForAutoFocus')
   autoFocusInput: any;
 
   errorLoadingQuizzes = false;
@@ -142,7 +178,7 @@ export class AppComponent implements OnInit {
   }
 
   async jsPromisesTwo() {
-    
+
     //
     // 'await' can't be a constant in an async method...
     // But it could if not async...
@@ -154,7 +190,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = await this.quizSvc.getMagicNumber(false);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
     }
 
     catch (err) {
@@ -169,7 +205,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = this.quizSvc.getMagicNumber(true);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
 
       // This runs code in parallel ! ! !
       const results = await Promise.all([n, n2]);
@@ -205,8 +241,8 @@ export class AppComponent implements OnInit {
   }
 
   private getEditedQuizzes(): QuizDisplay[] {
-    return this.quizzes.filter(x => 
-      !x.newlyAdded 
+    return this.quizzes.filter(x =>
+      !x.newlyAdded
       && !x.markedForDelete
       && this.generateNaiveChecksum(x) != x.naiveChecksum
     );
