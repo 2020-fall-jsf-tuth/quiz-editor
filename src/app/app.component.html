@@ -78,9 +78,12 @@
       class="col-md-8"
       [@detailsFromLeft]="detailsFromLeftAnimationState"
       (@detailsFromLeft.done)="detailsFromLeftAnimationDone()"
-
     >
     <div *ngIf="selectedQuiz != undefined">
+      <div
+      [@pulseSaveCancelButtons]:"DeletedQuizCount + AddedQuizCount + EditedQuizCount == 0 ? 'nothingToSave' : 'somethingToSave'"
+      >
+        </div>
       <button
         class="btn btn-outline-dark mt-3 mb-3"
         (click)="saveAllBatchEdits()"
