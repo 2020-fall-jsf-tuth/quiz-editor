@@ -24,6 +24,13 @@ export interface QuirkyShapeForSavingNewQuizzes {
   quizQuestions: string[];
 }
 
+export interface SaveQuizAPIShape {
+  changedQuizzes:
+  QuirkyShapeForSavingEditedQuizzes[];
+  newQuizzes:
+  QuirkyShapeForSavingNewQuizzes[];
+}
+
 @Injectable({
   providedIn: 'root'
 })

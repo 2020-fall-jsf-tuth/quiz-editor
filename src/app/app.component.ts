@@ -265,15 +265,20 @@ export class AppComponent implements OnInit {
 
     console.log(changedQuizzes);
 
-    const newQuizzes = [];
+    const newQuizzes = this.getAddedQuizzes().map(x => ({
+        quizName:x.name
+        , quizQuestions: x.questions.map(y =>  y.name)
+    }))
 
     this.quizSvc
       .saveQuizzes(
         changedQuizzes
         , newQuizzes
+     
       )
       .subscribe(
         numberOfEditedQuizzesSaved => console.log(`${numberOfEditedQuizzesSaved} edited quizzes were saved to the cloud...`)
+        //, numberOfnewQuizzesSaved => console.log(`${numberOfnewQuizzesSaved} new Quizzes were saved to the cloud...`)
         , err => console.error(err)
       )
     ;
