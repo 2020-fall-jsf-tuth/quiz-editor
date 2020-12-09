@@ -1,11 +1,42 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { QuizService, QuizDisplay } from './quiz.service';
 
+import {
+  trigger
+  , transition
+  , animate
+  , keyframes
+  , style
+} from '@angular/animations';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+     trigger('detailsFromLeft', [
+       transition('leftPosition => finalPosition', [
+         animate('300ms', keyframes([
+           style({ left: '-30px', offset: 0.0 }),
+           style({ left: '-20px', offset: 0.25 }),
+           style({ left: '-10px', offset: 0.5 }),
+           style({ left: '-5px', offset: 0.75 }),
+           style({ left: '0px', offset: 1.0 })
+         ]))
+       ]),
+     ]),
+     trigger('pulseSaveCancelButtons', [
+       transition('nothingToSave => somethingToSave', [
+         animate('400ms', keyframes([
+           style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
+           style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
+           style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 1.0 })
+         ]))
+       ])
+     ])
+   ]
 })
+
 export class AppComponent implements OnInit {
   title = 'quiz-editor';
 
@@ -18,7 +49,7 @@ export class AppComponent implements OnInit {
   }
 
   cancelAllBatchEdits() {
-    
+
     // Reload all the quizzes.
     this.loadQuizzes();
 
@@ -35,7 +66,6 @@ export class AppComponent implements OnInit {
       .fetchQuizzes()
       .subscribe(
         (data) => {
-          console.log(data);
           this.quizzes = (data as any).map(x => ({
             name: x.name
             , questions: x.questions
@@ -43,7 +73,7 @@ export class AppComponent implements OnInit {
             , newlyAdded: false
             , naiveChecksum: this.generateNaiveChecksum(x)
           }));
-          
+
           this.loading = false;
           this.errorLoadingQuizzes = false;
         }
@@ -54,7 +84,7 @@ export class AppComponent implements OnInit {
           this.errorLoadingQuizzes = true;
         }
       )
-    ;    
+    ;
   }
 
   selectedQuiz: QuizDisplay = undefined;
@@ -88,7 +118,7 @@ export class AppComponent implements OnInit {
     this.setSelectedQuiz(newQuiz);
   }
 
-  @ViewChild('myInputForAutoFocus') 
+  @ViewChild('myInputForAutoFocus')
   autoFocusInput: any;
 
   errorLoadingQuizzes = false;
@@ -109,9 +139,6 @@ export class AppComponent implements OnInit {
   loading = true;
 
   jsPromisesOne() {
-
-    console.log('here');
-
     const n = this.quizSvc.getMagicNumber(true);
     console.log(n); // ? ? ?
 
@@ -119,12 +146,8 @@ export class AppComponent implements OnInit {
     n
       .then(
         number => {
-          console.log(number);
-
           // Get another magic number...
           const n2 = this.quizSvc.getMagicNumber(false);
-          console.log(n2); // ? ? ?
-
           n2
             .then(
               x => console.log(x)
@@ -142,7 +165,7 @@ export class AppComponent implements OnInit {
   }
 
   async jsPromisesTwo() {
-    
+
     //
     // 'await' can't be a constant in an async method...
     // But it could if not async...
@@ -154,7 +177,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = await this.quizSvc.getMagicNumber(false);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
     }
 
     catch (err) {
@@ -169,7 +192,7 @@ export class AppComponent implements OnInit {
       console.log(n); // ? ? ?
 
       const n2 = this.quizSvc.getMagicNumber(true);
-      console.log(n2); // ? ? ? 
+      console.log(n2); // ? ? ?
 
       // This runs code in parallel ! ! !
       const results = await Promise.all([n, n2]);
@@ -199,14 +222,13 @@ export class AppComponent implements OnInit {
   }
 
   generateNaiveChecksum(quiz: QuizDisplay): string {
-
     // "Quiz 1b~To be, or not to be?~Yes or no?"
     return quiz.name + quiz.questions.map(x => '~' + x.name).join('');
   }
 
   private getEditedQuizzes(): QuizDisplay[] {
-    return this.quizzes.filter(x => 
-      !x.newlyAdded 
+    return this.quizzes.filter(x =>
+      !x.newlyAdded
       && !x.markedForDelete
       && this.generateNaiveChecksum(x) != x.naiveChecksum
     );
@@ -217,22 +239,21 @@ export class AppComponent implements OnInit {
   }
 
   saveAllBatchEdits() {
-
-    console.log(this.getEditedQuizzes());
-
     const changedQuizzes = this.getEditedQuizzes().map(x => ({
-      quiz: x.name
-      , questions: x.questions.map(y => ({ question: y.name}))
+        quiz: x.name,
+        questions: x.questions.map(y => ({ question: y.name}))
     }));
 
-    console.log(changedQuizzes);
-
-    const newQuizzes = [];
+    let newQuizzes = this.quizzes
+      .filter(quiz => quiz.newlyAdded)
+      .map(quiz => ({
+        quizName: quiz.name,
+        quizQuestions: quiz.questions.map(q => q.name)
+    }));
 
     this.quizSvc
       .saveQuizzes(
-        changedQuizzes
-        , newQuizzes
+        changedQuizzes, newQuizzes
       )
       .subscribe(
         numberOfEditedQuizzesSaved => console.log(`${numberOfEditedQuizzesSaved} edited quizzes were saved to the cloud...`)

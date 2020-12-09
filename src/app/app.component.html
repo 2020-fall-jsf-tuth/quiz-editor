@@ -1,5 +1,5 @@
 <div class="container">
-  <div 
+  <div
     class="row"
     *ngIf="loading"
   >
@@ -9,7 +9,7 @@
       </div>
     </div>
   </div>
-  <div 
+  <div
     class="row"
     *ngIf="!loading && errorLoadingQuizzes"
   >
@@ -19,20 +19,20 @@
       </div>
     </div>
   </div>
-  <div 
+  <div
     class="row"
     *ngIf="!loading && !errorLoadingQuizzes"
   >
     <div class="col-md-4">
-      <button 
+      <button
         class="btn btn-outline-success mt-3 mb-3"
-        (click)="addNewQuiz()" 
+        (click)="addNewQuiz()"
       >
         Add New Quiz
       </button>
       <div class="card">
         <div class="list-group list-group-flush">
-          <button 
+          <button
             class="list-group-item d-flex justify-content-between"
             *ngFor="let quiz of quizzes"
             (click)="setSelectedQuiz(quiz)"
@@ -47,26 +47,26 @@
         </div>
       </div>
     </div>
-    <div 
+    <div
       class="col-md-8"
       *ngIf="selectedQuiz == undefined"
     >
       <div class="alert alert-info my-3">
         Select or add a new quiz to get started...
-        JS Promises... 
-        <button 
+        JS Promises...
+        <button
           class="btn btn-link"
           (click)="jsPromisesOne()"
         >
           1
         </button>
-        <button 
+        <button
           class="btn btn-link"
           (click)="jsPromisesTwo()"
         >
           2
         </button>
-        <button 
+        <button
           class="btn btn-link"
           (click)="jsPromisesThree()"
         >
@@ -74,30 +74,33 @@
         </button>
       </div>
     </div>
-    <div 
+    <div
       class="col-md-8"
+      [@detailsFromLeft]="detailsFromLeftAnimationState"
+
       *ngIf="selectedQuiz != undefined"
     >
-      <button 
+    <div>
+      <button
         class="btn btn-outline-dark mt-3 mb-3"
         (click)="saveAllBatchEdits()"
       >
         Save Quizzes
-        <span 
+        <span
           class="badge badge-danger ml-1"
           *ngIf="DeletedQuizCount > 0"
           [title]="DeletedQuizCount + (DeletedQuizCount != 1 ? ' quizzes will be deleted' : ' quiz will be deleted')"
         >
           -{{ DeletedQuizCount }}
         </span>
-        <span 
+        <span
           class="badge badge-success ml-1"
           *ngIf="AddedQuizCount > 0"
           [title]="AddedQuizCount + (AddedQuizCount != 1 ? ' quizzes will be added' : ' quiz will be added')"
         >
           +{{ AddedQuizCount }}
         </span>
-        <span 
+        <span
           class="badge badge-light ml-1"
           *ngIf="EditedQuizCount > 0"
           [title]="EditedQuizCount + (EditedQuizCount != 1 ? ' quizzes will be updated' : ' quiz will be updated')"
@@ -105,7 +108,7 @@
           *{{ EditedQuizCount }}
         </span>
       </button>
-      <button 
+      <button
         class="btn btn-link mt-3 mb-3"
         (click)="cancelAllBatchEdits()"
       >
@@ -128,29 +131,29 @@
           Questions
         </div>
         <div class="card-body">
-          <button 
+          <button
             class="btn btn-outline-success"
             (click)="addNewQuestion()"
           >
             Add New Question
           </button>
-          <div 
+          <div
             class="form-group mt-3"
             *ngIf="selectedQuiz.questions.length > 0"
           >
-            <div 
+            <div
               class="row mt-3"
               *ngFor="let question of selectedQuiz.questions"
             >
               <div class="col-md-10">
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   class="form-control"
                   [(ngModel)]="question.name"
                 />
               </div>
               <div class="col-md-2">
-                <button 
+                <button
                   class="btn btn-link text-danger"
                   (click)="removeQuestion(question)"
                 >
@@ -167,13 +170,13 @@
         </div>
         <div class="card-body">
           <div class="form-check">
-            <label 
+            <label
               class="form-check-label"
               [class.text-danger]="selectedQuiz.markedForDelete"
             >
-              <input 
-                type="checkbox" 
-                class="form-check-input" 
+              <input
+                type="checkbox"
+                class="form-check-input"
                 [(ngModel)]="selectedQuiz.markedForDelete"
               />
               Mark for Delete
@@ -182,5 +185,6 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>

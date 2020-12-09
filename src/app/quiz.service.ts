@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+
 export interface QuizDisplay {
   name: string;
   questions: QuestionDisplay[];
@@ -47,23 +48,24 @@ export class QuizService {
   }
 
   saveQuizzes(
-    changedQuizzes: QuirkyShapeForSavingEditedQuizzes[]
-    , newQuizzes: QuirkyShapeForSavingNewQuizzes[] = []
+    changedQuizzes: QuirkyShapeForSavingEditedQuizzes[],
+    newQuizzes: QuirkyShapeForSavingNewQuizzes[] = []
   ) {
 
     let h = new HttpHeaders({
-      'Content-Type': 'application/json'
-      , 'X-Sas-Token': 'sig=K2WE6NQPtyoV6ke5hwPEaEaW52fgvyFWUeCEdPJls1s'
+      'Content-Type': 'application/json',
+      'X-Sas-Token': 'sig=K2WE6NQPtyoV6ke5hwPEaEaW52fgvyFWUeCEdPJls1s'
     });
 
-    //console.log(h);
+    console.log('in saveQuizzes')
+    console.log(newQuizzes);
 
     return this.builtInAngularHttpClient.post(
       'https://modern-js.azurewebsites.net/save-quizzes-proxy'
       , JSON.stringify(
         {
-          "changedQuizzes": changedQuizzes
-          , "newQuizzes": newQuizzes
+          "changedQuizzes": changedQuizzes,
+          "newQuizzes": newQuizzes
         }
       )
       , {
@@ -72,4 +74,3 @@ export class QuizService {
     );
   }
 }
-
