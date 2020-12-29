@@ -23,6 +23,19 @@
     class="row"
     *ngIf="!loading && !errorLoadingQuizzes"
   >
+    <div>
+      <input 
+        type="text"
+        [(ngModel)]="message"
+      >
+
+      <button
+        (click)="printUserMessage(message)"
+      >
+        Print Message
+      </button>
+
+    </div>
     <div class="col-md-4">
       <button 
         class="btn btn-outline-success mt-3 mb-3"

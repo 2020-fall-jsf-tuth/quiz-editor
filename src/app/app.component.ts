@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
 
   quizzes: QuizDisplay[] = [];
 
+  message = '';
+
   constructor(private quizSvc: QuizService) { }
 
   ngOnInit() {
@@ -24,6 +26,11 @@ export class AppComponent implements OnInit {
 
     // Make sure no quiz is currently selected.
     this.setSelectedQuiz(undefined);
+  }
+
+  private printUserMessage(message) {
+    this.quizSvc
+      .writeMessage(message);
   }
 
   private loadQuizzes() {
